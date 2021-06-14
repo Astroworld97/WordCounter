@@ -8,7 +8,7 @@ public class IanDictTest {
         System.out.println(d.isEmpty());
         System.out.println(d.size());
         d.printContents();
-        d.insert(s,x);
+        d.insert(s);
         System.out.println(d.isEmpty());
         System.out.println(d.size());
         d.printContents();

@@ -56,10 +56,10 @@ public class Dictionary {
     }
 
     /**
-     * insert(k, o): inserts and returns the entry (k, o)
+     * Inserts the word with the correct amount found into the
      */
-    public void insert(String key, Integer value) {
-        Entry toAdd = new Entry(key, value);
+    public void insert(String key) {
+        Entry toAdd = new Entry(key, 1);
 
         for(int i = 0; i<list.size(); i++){
             if(list.get(i).getKey().equals(toAdd.getKey())) {
