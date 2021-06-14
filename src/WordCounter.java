@@ -1,5 +1,5 @@
 import java.io.*;
-import java.util.Scanner;
+import java.util.*;
 //source: https://www.reddit.com/r/javaexamples/comments/344kch/reading_and_parsing_data_from_a_file/
 
 public class WordCounter{
@@ -8,7 +8,7 @@ public class WordCounter{
     File txtFile;
     FileReader fr;
     BufferedReader br;
-    Dictionary dict;
+    HashMap<String, Integer> dict;
 
     public WordCounter() throws FileNotFoundException, IOException {
         scan = new Scanner(System.in);
@@ -16,7 +16,7 @@ public class WordCounter{
         txtFile = new File(filePath);
         fr = new FileReader(txtFile);
         br = new BufferedReader(fr);
-        dict = new Dictionary();
+        dict = new HashMap<String, Integer>();
     }
 
     public String askForFilePath(){
@@ -30,9 +30,11 @@ public class WordCounter{
             while(line!=null){
                 // use string.split to load a string array with the values from each line of
                 // the file, using a space as the delimiter
+
                 String[] tokens = line.split(" ");
                 for(String s: tokens){
-                    dict.insert(s);
+                    s = s.toLowerCase();
+                    insert(s);
                 }
                 // read next line before looping
                 // if end of file reached
@@ -47,9 +49,31 @@ public class WordCounter{
         }
     }
 
-    public void countedWords(){
-        dict.printContents();
+    public void dictLength(){
+        System.out.println(dict.size());
     }
 
+    public void insert(String key) {
+        if(dict.containsKey(key)){
+            int oldAmount = dict.get(key); //gets the counted amount currently in the dictionary for this word
+            dict.replace(key, oldAmount+1);
+        }else{
+            dict.put(key, 1);
+        }
 
+    }
+
+    public void printContents() {
+        if(dict.isEmpty()){
+            System.out.println("Dictionary is empty!");
+        }else {
+            Set list = dict.entrySet();
+            Iterator<Map.Entry<String, Integer>> it = list.iterator();
+
+            while (it.hasNext()) {
+                Map.Entry<String, Integer> entry = it.next();
+                System.out.println("Word: '" + entry.getKey() + "' Amount in text: " + entry.getValue());
+            }
+        }
+    }
 }

@@ -1,3 +1,5 @@
+package Tests;
+
 public class Entry {
 
     String key;

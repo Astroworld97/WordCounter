@@ -5,7 +5,6 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException, IOException {
         WordCounter w = new WordCounter();
         w.readTxtFile();
-        w.countedWords();
-        System.out.println("");
+        w.printContents();
     }
 }
