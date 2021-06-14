@@ -4,8 +4,8 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args) throws FileNotFoundException, IOException {
         WordCounter w = new WordCounter();
-        w.askForFilePath();
         w.readTxtFile();
         w.countedWords();
+        System.out.println("");
     }
 }

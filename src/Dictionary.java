@@ -1,8 +1,5 @@
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.*;
 import java.lang.Integer;
-import java.util.LinkedList;
-import java.util.List;
 //source: https://stackoverflow.com/questions/4579683/implement-dictionary-using-java
 
 public class Dictionary {
@@ -59,19 +56,20 @@ public class Dictionary {
      * Inserts the word with the correct amount found into the
      */
     public void insert(String key) {
+        key = key.toLowerCase();
         Entry toAdd = new Entry(key, 1);
 
-        for(int i = 0; i<list.size(); i++){
-            if(list.get(i).getKey().equals(toAdd.getKey())) {
-                Integer newNum = list.get(i).getValue();
-                int newInt = newNum.intValue();
-                newInt++;
-                toAdd.setValue(newInt);
-                list.set(i, toAdd);
-                break;
+        if(list.contains(toAdd)){
+            for(int i = 0; i<list.size(); i++){
+                if(list.get(i).getKey().equals(toAdd.getKey())) {
+                    list.set(i, new Entry(key, new Integer(list.get(i).getValue()+1)));
+                    break;
+                }
             }
+        }else{
+            list.add(toAdd);
         }
-        list.add(toAdd);
+
     }
 
     /**
@@ -98,7 +96,7 @@ public class Dictionary {
             System.out.println("Dictionary is empty!");
         }
         for (int i = 0; i < list.size(); i++) {
-            System.out.println("Word: " + list.get(i).getKey() + "  Amount in text: " + list.get(i).getValue());
+            System.out.println("Word: '" + list.get(i).getKey() + "' Amount in text: " + list.get(i).getValue());
         }
     }
 
