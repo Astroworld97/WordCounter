@@ -8,7 +8,7 @@ public class WordCounter{
     File txtFile;
     FileReader fr;
     BufferedReader br;
-    HashMap<String, Integer> dict;
+    TreeMap<String, Integer> dict; //used TreeMap instead of HashMap to get the words in alphabetical order
 
     public WordCounter() throws FileNotFoundException, IOException {
         scan = new Scanner(System.in);
@@ -16,7 +16,7 @@ public class WordCounter{
         txtFile = new File(filePath);
         fr = new FileReader(txtFile);
         br = new BufferedReader(fr);
-        dict = new HashMap<String, Integer>();
+        dict = new TreeMap<String, Integer>();
     }
 
     public String askForFilePath(){
@@ -31,7 +31,7 @@ public class WordCounter{
                 // use string.split to load a string array with the values from each line of
                 // the file, using a space as the delimiter
 
-                String[] tokens = line.split(" ");
+                String[] tokens = line.replaceAll("[^a-zA-Z ]", "").toLowerCase().split("\\s+"); //this line turns everything to lowercase and uses the regular expression to strip of all punctuation
                 for(String s: tokens){
                     s = s.toLowerCase();
                     insert(s);
